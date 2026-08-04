@@ -1,8 +1,9 @@
-member_id,name,email,role,joined_date
-M001,Nguyen Van An,an.nguyen@example.com,member,2025-09-01
-M002,Tran Thi Binh,binh.tran@example.com,officer,2025-09-01
-M003,Le Van Cuong,cuong.le@example.com,member,2025-10-15
-M004,Pham Thi Dung,dung.pham@example.com,member,2025-11-01
-M005,Hoang Van Em,em.hoang@example.com,officer,2025-09-20
-M006,Do Thi Phuong,phuong.do@example.com,member,2026-01-10
-M007,Ngo Van Giang,giang.ngo@example.com,member,2026-02-05
+member_id,full_name,class_name,join_date,role,position
+M001,Nguyễn Văn An,CNTT01,2025-09-01,officer,Chủ nhiệm
+M002,Trần Thị Bình,CNTT01,2025-09-01,officer,Phó chủ nhiệm
+M003,Lê Văn Cường,CNTT02,2025-09-05,member,
+M004,Phạm Thị Dung,CNTT02,2025-09-10,member,
+M005,Hoàng Văn Em,CNTT03,2025-10-01,member,
+M006,Đỗ Thị Phương,CNTT03,2025-10-15,member,
+M007,Vũ Văn Giang,CNTT01,2025-11-01,member,
+M008,Bùi Thị Hoa,CNTT02,2025-12-01,member,
