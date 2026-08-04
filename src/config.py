@@ -1,0 +1,1 @@
+"""Cấu hình chung cho dự án (đường dẫn, hằng số, biến môi trường)."""

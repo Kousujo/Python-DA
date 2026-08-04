@@ -1,0 +1,1 @@
+"""Pipeline chính: đọc CSV → loader → Club → analysis.stats → visualization.charts → (db) → xuất kết quả."""

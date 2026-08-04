@@ -1,0 +1,1 @@
+"""Thống kê Pandas + SciPy: tỉ lệ tham gia theo sự kiện/thành viên, xếp hạng, xu hướng tăng trưởng (linregress)."""

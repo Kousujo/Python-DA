@@ -1,0 +1,1 @@
+"""Package processing: đọc CSV, validate dữ liệu, dựng đối tượng model."""

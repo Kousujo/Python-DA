@@ -1,0 +1,1 @@
+"""Định nghĩa class Event (base), MandatoryEvent, OptionalEvent (override get_attendance_weight)."""

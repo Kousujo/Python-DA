@@ -1,0 +1,1 @@
+"""Exception nghiệp vụ: ClubManagementError, MemberNotFoundError, EventNotFoundError, DuplicateAttendanceError."""

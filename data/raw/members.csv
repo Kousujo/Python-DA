@@ -1,0 +1,8 @@
+member_id,name,email,role,joined_date
+M001,Nguyen Van An,an.nguyen@example.com,member,2025-09-01
+M002,Tran Thi Binh,binh.tran@example.com,officer,2025-09-01
+M003,Le Van Cuong,cuong.le@example.com,member,2025-10-15
+M004,Pham Thi Dung,dung.pham@example.com,member,2025-11-01
+M005,Hoang Van Em,em.hoang@example.com,officer,2025-09-20
+M006,Do Thi Phuong,phuong.do@example.com,member,2026-01-10
+M007,Ngo Van Giang,giang.ngo@example.com,member,2026-02-05

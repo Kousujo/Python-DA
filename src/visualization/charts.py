@@ -1,0 +1,1 @@
+"""Vẽ ≥3 biểu đồ Matplotlib từ kết quả phân tích (tỉ lệ, xếp hạng, xu hướng...)."""

@@ -1,0 +1,2 @@
+-- Schema SQL Server cho bảng members, events, attendance
+-- Mở rộng phase 5

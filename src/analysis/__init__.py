@@ -1,0 +1,1 @@
+"""Package analysis: thống kê Pandas/SciPy (tỉ lệ tham gia, xếp hạng, xu hướng)."""

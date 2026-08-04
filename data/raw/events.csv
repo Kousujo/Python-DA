@@ -1,0 +1,7 @@
+event_id,event_name,event_date,event_type
+E001,Chao tan sinh vien,2025-10-05,mandatory
+E002,Workshop Python co ban,2025-11-12,optional
+E003,Hoi thao huong nghiep,2025-12-20,mandatory
+E004,Giai bong da CLB,2026-01-15,optional
+E005,Le tot nghiep,2026-03-10,mandatory
+E006,Da ngoai cuoi khoa,2026-04-25,optional

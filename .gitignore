@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Data - giữ placeholder, bỏ qua dữ liệu thật sau này
+data/raw/*.csv
+!data/raw/members.csv
+!data/raw/events.csv
+!data/raw/attendance.csv

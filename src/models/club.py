@@ -1,0 +1,1 @@
+"""Class Club: điều phối danh sách Member/Event, điểm danh, thống kê tỉ lệ tham gia (dùng đa hình)."""

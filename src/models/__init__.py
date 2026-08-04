@@ -1,0 +1,1 @@
+"""Package models: định nghĩa các class OOP cốt lõi (Member, Officer, Event, MandatoryEvent, OptionalEvent, Club, exceptions)."""

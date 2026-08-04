@@ -1,0 +1,1 @@
+"""Định nghĩa class Member (base) và Officer (kế thừa, override get_score_multiplier)."""

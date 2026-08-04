@@ -1,0 +1,1 @@
+"""Đọc CSV từ data/raw/ → dựng đối tượng Member/Officer, Event (Mandatory/Optional), validate, bắt ngoại lệ nghiệp vụ."""
