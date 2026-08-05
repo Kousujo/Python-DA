@@ -1,7 +1,7 @@
 event_id,name,date,category,event_type
-E001,Lễ ra mắt CLB,2025-09-15,Sinh hoạt chung,mandatory
-E002,Workshop kỹ năng mềm,2025-10-05,Đào tạo,optional
-E003,Họp tổng kết tháng 10,2025-10-30,Sinh hoạt chung,mandatory
-E004,Giao lưu văn hoá,2025-11-10,Giao lưu,optional
-E005,Cuộc thi lập trình nội bộ,2025-11-25,Học thuật,mandatory
-E006,Team building cuối năm,2025-12-20,Giải trí,optional
+EV018,Gala tổng kết năm,2026-03-18,Tổng kết,mandatory
+EV006,Tech Talk: Giao lưu chia sẻ kinh nghiệm IT,2026-03-31,Giao lưu,optional
+EV009,Huấn luyện Git & làm việc nhóm,2026-04-05,Huấn luyện,mandatory
+EV012,Kiểm tra kỹ năng lập trình giữa kỳ,2026-04-23,Kiểm tra kỹ năng,mandatory
+EV003,Workshop Python Data,2026-05-10,Đào tạo,optional
+EV015,Sinh hoạt định kỳ T3,2026-05-16,Sinh hoạt chung,mandatory
