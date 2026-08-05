@@ -59,15 +59,15 @@ def load_club_from_csv(data_dir: str | Path) -> Club:
     data_dir = Path(data_dir)
     club = Club()
 
-    members_df = pd.read_csv(data_dir / "members.csv", dtype=str)
+    members_df = pd.read_csv(data_dir / "members.csv", dtype=str, encoding="utf-8")
     for _, row in members_df.iterrows():
         club.add_member(_build_member(row))
 
-    events_df = pd.read_csv(data_dir / "events.csv", dtype=str)
+    events_df = pd.read_csv(data_dir / "events.csv", dtype=str, encoding="utf-8")
     for _, row in events_df.iterrows():
         club.add_event(_build_event(row))
 
-    attendance_df = pd.read_csv(data_dir / "attendance.csv", dtype=str)
+    attendance_df = pd.read_csv(data_dir / "attendance.csv", dtype=str, encoding="utf-8")
     skipped = 0
     for _, row in attendance_df.iterrows():
         try:

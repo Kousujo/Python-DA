@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 
 from src.analysis.stats import engagement_with_stats, growth_trend
+from src.config import setup_utf8_stdout
 from src.processing.loader import load_club_from_csv
 from src.visualization.charts import (
     plot_member_growth,
@@ -17,7 +17,7 @@ FIGURES_DIR = Path("report/figures")
 
 
 def main() -> None:
-    sys.stdout.reconfigure(encoding="utf-8")
+    setup_utf8_stdout()
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
     club = load_club_from_csv("data/raw")
