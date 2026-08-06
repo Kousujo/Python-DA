@@ -1,1 +1,44 @@
-"""Dashboard Streamlit (mở rộng phase 6): hiển thị tương tác toàn bộ phân tích cho thuyết trình."""
+"""Dashboard Streamlit — hiển thị lại phân tích Club dưới dạng tương tác."""
+
+from __future__ import annotations
+
+import streamlit as st
+
+from src.analysis.stats import engagement_with_stats, growth_trend
+from src.processing.loader import load_club_from_csv
+from src.visualization.charts import (
+    plot_member_growth,
+    plot_participation_by_event,
+    plot_top_engaged_members,
+)
+
+st.set_page_config(page_title="Quản lý CLB IT Club", layout="wide")
+
+
+@st.cache_resource
+def get_club():
+    return load_club_from_csv("data/raw")
+
+
+club = get_club()
+
+st.title("Dashboard quản lý câu lạc bộ — IT Club")
+
+tab1, tab2, tab3 = st.tabs(["Tỉ lệ tham gia", "Tăng trưởng thành viên", "Xếp hạng tích cực"])
+
+with tab1:
+    st.pyplot(plot_participation_by_event(club))
+    st.dataframe(club.participation_rate_by_event(), use_container_width=True)
+
+with tab2:
+    trend_df, trend_stats = growth_trend(club)
+    st.pyplot(plot_member_growth(trend_df, trend_stats))
+    st.write(
+        f"Tốc độ tăng trưởng: **{trend_stats['slope']:.2f} thành viên/ngày** "
+        f"(R² = {trend_stats['r_value'] ** 2:.3f})"
+    )
+
+with tab3:
+    top_n = st.slider("Số thành viên hiển thị", min_value=5, max_value=len(club._members), value=10)
+    st.pyplot(plot_top_engaged_members(club, top_n=top_n))
+    st.dataframe(engagement_with_stats(club), use_container_width=True)
