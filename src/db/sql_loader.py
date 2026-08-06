@@ -30,7 +30,9 @@ def create_schema(engine: Engine) -> None:
 
 def load_csv_to_sql(engine: Engine, data_dir: str | Path = "data/raw") -> None:
     """Nạp 3 CSV vào 3 bảng đã tạo. Lọc bỏ attendance không khớp FK.
-    Dùng INSERT thủ công thay vì to_sql() để đảm bảo Unicode (NVARCHAR) đúng.
+    Dùng INSERT thủ công từng dòng thay vì to_sql() để tránh một dòng
+    vi phạm FK làm chết cả batch insert (to_sql() theo mặc định gộp
+    nhiều dòng vào một lệnh, gặp lỗi là hỏng hết).
     """
     data_dir = Path(data_dir)
 

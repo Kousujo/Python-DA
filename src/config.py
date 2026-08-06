@@ -17,8 +17,6 @@ def setup_utf8_stdout() -> None:
     Đối với pandas.DataFrame.to_string(): phương thức này tự lấy encoding từ sys.stdout,
     reconfigure() giúp pandas nhặt được utf-8.
     """
-    import os
-
     os.environ["PYTHONIOENCODING"] = "utf-8"
     sys.stdout.reconfigure(encoding="utf-8")
 
@@ -30,5 +28,5 @@ def get_sql_connection_string() -> str:
     driver = os.environ.get("SQL_DRIVER", "ODBC Driver 17 for SQL Server")
     return (
         f"mssql+pyodbc://@{server}/{database}"
-        f"?driver={driver.replace(' ', '+')}&trusted_connection=yes&charset=utf8"
+        f"?driver={driver.replace(' ', '+')}&trusted_connection=yes"
     )
