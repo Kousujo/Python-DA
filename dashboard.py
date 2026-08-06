@@ -28,7 +28,7 @@ tab1, tab2, tab3 = st.tabs(["Tỉ lệ tham gia", "Tăng trưởng thành viên"
 
 with tab1:
     st.pyplot(plot_participation_by_event(club))
-    st.dataframe(club.participation_rate_by_event(), use_container_width=True)
+    st.dataframe(club.participation_rate_by_event(), width="stretch")
 
 with tab2:
     trend_df, trend_stats = growth_trend(club)
@@ -41,4 +41,4 @@ with tab2:
 with tab3:
     top_n = st.slider("Số thành viên hiển thị", min_value=5, max_value=len(club._members), value=10)
     st.pyplot(plot_top_engaged_members(club, top_n=top_n))
-    st.dataframe(engagement_with_stats(club), use_container_width=True)
+    st.dataframe(engagement_with_stats(club), width="stretch")
