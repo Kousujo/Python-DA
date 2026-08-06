@@ -6,4 +6,3 @@ streamlit
 sqlalchemy
 pyodbc
 python-dotenv
-networkx

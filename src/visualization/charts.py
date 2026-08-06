@@ -79,23 +79,17 @@ def plot_top_engaged_members(
     return fig
 
 
-def plot_churn_risk(df: pd.DataFrame, save_path: str | None = None) -> plt.Figure:
-    """Biểu đồ scatter: recency vs trend_drop, màu theo risk_level."""
-    color_map = {"Nguy cơ cao": "#C44E52", "Ổn định": "#55A868", "Bình thường": "#4C72B0"}
-    fig, ax = plt.subplots(figsize=(8, 6))
-    for level, group in df.groupby("risk_level"):
-        ax.scatter(
-            group["recency_days"], group["trend_drop"],
-            label=level, color=color_map.get(level, "#999999"), s=60,
-        )
-    high_risk = df[df["risk_level"] == "Nguy cơ cao"]
-    for _, r in high_risk.iterrows():
-        ax.annotate(r["member_name"], (r["recency_days"], r["trend_drop"]), fontsize=8)
+def plot_churn_risk(df: pd.DataFrame, top_n: int = 10, save_path: str | None = None) -> plt.Figure:
+    """Biểu đồ cột ngang: xếp hạng nguy cơ ngừng tham gia theo churn_score."""
+    color_map = {"Nguy cơ cao": "#C44E52", "Bình thường": "#4C72B0", "Ổn định": "#55A868"}
+    top = df.sort_values("churn_score", ascending=False).head(top_n).sort_values("churn_score")
+    colors = [color_map.get(level, "#999999") for level in top["risk_level"]]
 
-    ax.set_title("Nguy cơ ngừng tham gia CLB")
-    ax.set_xlabel("Số ngày chưa tham gia gần nhất")
-    ax.set_ylabel("Mức giảm tỉ lệ tham gia (nửa đầu − nửa cuối)")
-    ax.legend()
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.barh(top["member_name"], top["churn_score"], color=colors)
+    ax.set_title(f"Top {top_n} thành viên có nguy cơ ngừng tham gia cao nhất")
+    ax.set_xlabel("Churn score (càng cao = nguy cơ càng lớn)")
+    ax.set_ylabel("Thành viên")
     fig.tight_layout()
     if save_path:
         fig.savefig(save_path, dpi=150)

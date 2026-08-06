@@ -88,7 +88,7 @@ club-management/
 
 ## 5. Về dữ liệu
 
-Hiện **chưa có dữ liệu thật** — đang xin dữ liệu từ CLB, có thể mất thời gian. Trong lúc chờ, dự án được code theo hướng **generic theo tên cột** (không hard-code số liệu cụ thể), dùng dữ liệu mô phỏng đặt tại `data/raw/` đúng schema đã thiết kế ở mục 2/3. Khi có dữ liệu thật, chỉ cần thay 3 file CSV, không cần sửa logic.
+Dự án dùng **dữ liệu mô phỏng theo kịch bản thực tế** tại `data/raw/` — đúng theo lựa chọn nguồn dữ liệu mà đề bài cho phép (30 thành viên, 12 sự kiện, 190 lượt điểm danh hợp lệ + 4 dòng lỗi chủ ý để demo exception). Code được viết **generic theo tên cột** (không hard-code số liệu cụ thể): khi có dữ liệu thật, chỉ cần thay 3 file CSV đúng schema ở mục 2/3, không cần sửa logic.
 
 ## 6. Kế hoạch triển khai (theo pha, không cố định theo ngày vì đang chờ dữ liệu)
 
