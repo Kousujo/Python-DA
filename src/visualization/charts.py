@@ -77,3 +77,26 @@ def plot_top_engaged_members(
     if save_path:
         fig.savefig(save_path, dpi=150)
     return fig
+
+
+def plot_churn_risk(df: pd.DataFrame, save_path: str | None = None) -> plt.Figure:
+    """Biểu đồ scatter: recency vs trend_drop, màu theo risk_level."""
+    color_map = {"Nguy cơ cao": "#C44E52", "Ổn định": "#55A868", "Bình thường": "#4C72B0"}
+    fig, ax = plt.subplots(figsize=(8, 6))
+    for level, group in df.groupby("risk_level"):
+        ax.scatter(
+            group["recency_days"], group["trend_drop"],
+            label=level, color=color_map.get(level, "#999999"), s=60,
+        )
+    high_risk = df[df["risk_level"] == "Nguy cơ cao"]
+    for _, r in high_risk.iterrows():
+        ax.annotate(r["member_name"], (r["recency_days"], r["trend_drop"]), fontsize=8)
+
+    ax.set_title("Nguy cơ ngừng tham gia CLB")
+    ax.set_xlabel("Số ngày chưa tham gia gần nhất")
+    ax.set_ylabel("Mức giảm tỉ lệ tham gia (nửa đầu − nửa cuối)")
+    ax.legend()
+    fig.tight_layout()
+    if save_path:
+        fig.savefig(save_path, dpi=150)
+    return fig

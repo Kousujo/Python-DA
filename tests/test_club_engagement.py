@@ -49,3 +49,15 @@ except DuplicateAttendanceError:
     pass
 
 print("OK - tat ca assert pass (da hinh + exception dung dac ta).")
+
+from src.analysis.stats import churn_risk
+
+club.add_event(MandatoryEvent("E3", "Sinh hoat thang 3", date(2025, 3, 1), "Sinh hoat"))
+club.check_in("M2", "E3", datetime(2025, 3, 1, 8, 0))
+
+risk = churn_risk(club)
+m1_risk = risk[risk["member_id"] == "M1"].iloc[0]
+m2_risk = risk[risk["member_id"] == "M2"].iloc[0]
+assert m1_risk["churn_score"] > m2_risk["churn_score"], "M1 lau khong tham gia phai nguy co cao hon M2"
+
+print("OK - churn_risk() dung: thanh vien lau khong tham gia co churn_score cao hon.")

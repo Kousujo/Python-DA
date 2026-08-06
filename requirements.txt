@@ -1,8 +1,9 @@
-pandas
+﻿pandas
 numpy
 matplotlib
 scipy
 streamlit
-pyodbc
 sqlalchemy
+pyodbc
 python-dotenv
+networkx

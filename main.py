@@ -41,6 +41,19 @@ def main() -> None:
     plot_participation_by_event(club, str(FIGURES_DIR / "participation_by_event.png"))
     plot_member_growth(trend_df, trend_stats, str(FIGURES_DIR / "member_growth.png"))
     plot_top_engaged_members(club, save_path=str(FIGURES_DIR / "top_members.png"))
+
+    from src.analysis.network import build_coattendance_graph, plot_coattendance_network
+    from src.analysis.stats import churn_risk
+    from src.visualization.charts import plot_churn_risk
+
+    risk_df = churn_risk(club)
+    print("\n=== Nguy cơ ngừng tham gia ===")
+    print(risk_df.to_string(index=False))
+    plot_churn_risk(risk_df, str(FIGURES_DIR / "churn_risk.png"))
+
+    graph = build_coattendance_graph(club)
+    plot_coattendance_network(graph, str(FIGURES_DIR / "coattendance_network.png"))
+
     print(f"\nĐã lưu 3 biểu đồ vào {FIGURES_DIR}/")
 
 

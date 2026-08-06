@@ -82,3 +82,72 @@ def engagement_with_stats(
 
     df["classification"] = df["z_score"].apply(classify)
     return df
+
+
+def churn_risk(club: Club, z_threshold: float = 1.0) -> pd.DataFrame:
+    """Ước lượng nguy cơ ngừng tham gia CLB.
+
+    2 yếu tố, chuẩn hoá z-score:
+      - recency_days: số ngày kể từ lần tham gia gần nhất đến sự kiện
+        cuối cùng trong dữ liệu (chưa từng tham gia = stale tối đa).
+      - trend_drop: tỉ lệ tham gia nửa đầu khoảng thời gian - nửa cuối
+        (dương = đang giảm dần).
+    churn_score = trung bình 2 z-score, phân loại theo z_threshold,
+    đồng bộ phong cách với engagement_with_stats().
+    """
+    if not club._events:
+        return pd.DataFrame()
+
+    event_dates = sorted(e.date for e in club._events.values())
+    last_date = event_dates[-1]
+    first_date = event_dates[0]
+    mid_date = event_dates[len(event_dates) // 2]
+
+    first_half_ids = {eid for eid, e in club._events.items() if e.date <= mid_date}
+    second_half_ids = {eid for eid, e in club._events.items() if e.date > mid_date}
+
+    df = club.to_dataframe()
+
+    rows = []
+    for member_id, member in club._members.items():
+        attended = df[df["member_id"] == member_id]
+        if attended.empty:
+            recency_days = (last_date - first_date).days
+            rate_first = rate_second = 0.0
+        else:
+            last_attend_date = pd.to_datetime(attended["checkin_time"]).max().date()
+            recency_days = (last_date - last_attend_date).days
+            attended_ids = set(attended["event_id"])
+            rate_first = (
+                len(attended_ids & first_half_ids) / len(first_half_ids)
+                if first_half_ids else 0.0
+            )
+            rate_second = (
+                len(attended_ids & second_half_ids) / len(second_half_ids)
+                if second_half_ids else 0.0
+            )
+        rows.append(
+            {
+                "member_id": member_id,
+                "member_name": member.full_name,
+                "recency_days": recency_days,
+                "trend_drop": rate_first - rate_second,
+            }
+        )
+
+    result = pd.DataFrame(rows)
+    if len(result) < 2 or result["recency_days"].std(ddof=0) == 0:
+        result["churn_score"] = 0.0
+    else:
+        z_recency = stats.zscore(result["recency_days"])
+        z_trend = stats.zscore(result["trend_drop"])
+        result["churn_score"] = (z_recency + z_trend) / 2
+
+    result["risk_level"] = result["churn_score"].apply(
+        lambda z: (
+            "Nguy cơ cao" if z >= z_threshold
+            else "Ổn định" if z <= -z_threshold
+            else "Bình thường"
+        )
+    )
+    return result.sort_values("churn_score", ascending=False)
