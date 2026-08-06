@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import streamlit as st
 
-from src.analysis.stats import engagement_with_stats, growth_trend
+from src.analysis.stats import churn_risk, engagement_with_stats, growth_trend
 from src.processing.loader import load_club_from_csv
 from src.visualization.charts import (
+    plot_churn_risk,
     plot_member_growth,
     plot_participation_by_event,
     plot_top_engaged_members,
@@ -24,7 +25,9 @@ club = get_club()
 
 st.title("Dashboard quản lý câu lạc bộ — IT Club")
 
-tab1, tab2, tab3 = st.tabs(["Tỉ lệ tham gia", "Tăng trưởng thành viên", "Xếp hạng tích cực"])
+tab1, tab2, tab3, tab4 = st.tabs(
+    ["Tỉ lệ tham gia", "Tăng trưởng thành viên", "Xếp hạng tích cực", "Nguy cơ ngừng tham gia"]
+)
 
 with tab1:
     st.pyplot(plot_participation_by_event(club))
@@ -42,3 +45,9 @@ with tab3:
     top_n = st.slider("Số thành viên hiển thị", min_value=5, max_value=len(club._members), value=10)
     st.pyplot(plot_top_engaged_members(club, top_n=top_n))
     st.dataframe(engagement_with_stats(club), width="stretch")
+
+with tab4:
+    risk_df = churn_risk(club)
+    risk_top_n = st.slider("Số thành viên hiển thị ", min_value=5, max_value=len(club._members), value=10)
+    st.pyplot(plot_churn_risk(risk_df, top_n=risk_top_n))
+    st.dataframe(risk_df, width="stretch")

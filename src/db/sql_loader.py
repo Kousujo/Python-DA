@@ -87,6 +87,14 @@ def load_csv_to_sql(engine: Engine, data_dir: str | Path = "data/raw") -> None:
                 f"dòng attendance không khớp FK."
             )
 
+        before = len(valid_attendance)
+        valid_attendance = valid_attendance.drop_duplicates(
+            subset=["member_id", "event_id"], keep="first"
+        )
+        dup_dropped = before - len(valid_attendance)
+        if dup_dropped:
+            print(f"Đã lọc bỏ {dup_dropped} dòng attendance bị trùng (member_id, event_id).")
+
         for _, row in valid_attendance.iterrows():
             conn.execute(
                 text(
