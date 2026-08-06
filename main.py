@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from src.analysis.stats import engagement_with_stats, growth_trend
+from src.analysis.network import build_coattendance_graph, plot_coattendance_network
+from src.analysis.stats import churn_risk, engagement_with_stats, growth_trend
 from src.config import setup_utf8_stdout
 from src.processing.loader import load_club_from_csv
 from src.visualization.charts import (
+    plot_churn_risk,
     plot_member_growth,
     plot_participation_by_event,
     plot_top_engaged_members,
@@ -42,10 +44,6 @@ def main() -> None:
     plot_member_growth(trend_df, trend_stats, str(FIGURES_DIR / "member_growth.png"))
     plot_top_engaged_members(club, save_path=str(FIGURES_DIR / "top_members.png"))
 
-    from src.analysis.network import build_coattendance_graph, plot_coattendance_network
-    from src.analysis.stats import churn_risk
-    from src.visualization.charts import plot_churn_risk
-
     risk_df = churn_risk(club)
     print("\n=== Nguy cơ ngừng tham gia ===")
     print(risk_df.to_string(index=False))
@@ -54,7 +52,7 @@ def main() -> None:
     graph = build_coattendance_graph(club)
     plot_coattendance_network(graph, str(FIGURES_DIR / "coattendance_network.png"))
 
-    print(f"\nĐã lưu 3 biểu đồ vào {FIGURES_DIR}/")
+    print(f"\nĐã lưu 5 biểu đồ vào {FIGURES_DIR}/")
 
 
 if __name__ == "__main__":
